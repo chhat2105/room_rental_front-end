@@ -92,7 +92,7 @@ class _FavoritesView extends StatelessWidget {
             children: [
               const Icon(Icons.favorite_border, size: 64, color: AppTheme.textDim),
               const SizedBox(height: 12),
-              const Text('Sign in to save properties to your wishlist', style: TextStyle(color: Colors.white, fontSize: 16)),
+              const Text('Sign in to save properties to your wishlist', style: TextStyle(color: AppTheme.textMain, fontSize: 16)),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
@@ -117,7 +117,7 @@ class _FavoritesView extends StatelessWidget {
                   children: [
                     Icon(Icons.favorite_outline, size: 64, color: AppTheme.textDim.withValues(alpha: 0.5)),
                     const SizedBox(height: 12),
-                    const Text('No favorites yet', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                    const Text('No favorites yet', style: TextStyle(color: AppTheme.textMain, fontSize: 16, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 4),
                     const Text('Tap the heart icon on any listing to save it here', style: TextStyle(color: AppTheme.textDim, fontSize: 13)),
                   ],
@@ -173,7 +173,7 @@ class _ProfileView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(user.fullName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white)),
+                              Text(user.fullName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppTheme.textMain)),
                               const SizedBox(height: 2),
                               Text('@${user.username}', style: const TextStyle(color: AppTheme.textMuted, fontSize: 13)),
                               const SizedBox(height: 6),
@@ -245,7 +245,7 @@ class _ProfileView extends StatelessWidget {
                     children: [
                       const Icon(Icons.account_circle_outlined, size: 72, color: AppTheme.textDim),
                       const SizedBox(height: 16),
-                      const Text('Not Signed In', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+                      const Text('Not Signed In', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                       const SizedBox(height: 8),
                       const Text('Sign in to rent rooms, schedule visits, or list properties', style: TextStyle(color: AppTheme.textDim, fontSize: 13), textAlign: TextAlign.center),
                       const SizedBox(height: 24),
@@ -282,7 +282,7 @@ class _InfoRow extends StatelessWidget {
           const SizedBox(width: 12),
           Text(label, style: const TextStyle(color: AppTheme.textDim, fontSize: 13)),
           const Spacer(),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 13)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.textMain, fontSize: 13)),
         ],
       ),
     );

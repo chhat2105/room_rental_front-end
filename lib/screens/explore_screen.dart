@@ -53,7 +53,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Filter Properties', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                      const Text('Filter Properties', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                       TextButton(
                         onPressed: () {
                           propProv.setFilters(maxPrice: null, bedrooms: null);
@@ -68,7 +68,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text('Max Monthly Rent', style: TextStyle(color: AppTheme.textMuted, fontSize: 14)),
-                      Text('\$${tempPrice.toInt()}/mo', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                      Text('\$${tempPrice.toInt()}/mo', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                     ],
                   ),
                   Slider(
@@ -92,9 +92,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           label: Text(beds == null ? 'Any' : '$beds+'),
                           selected: isSelected,
                           selectedColor: AppTheme.primary,
-                          backgroundColor: Colors.white.withValues(alpha: 0.05),
+                          backgroundColor: const Color(0xFFF1F5F9),
                           labelStyle: TextStyle(
-                            color: isSelected ? Colors.white : AppTheme.textMuted,
+                            color: isSelected ? Colors.white : AppTheme.textMain,
                             fontWeight: FontWeight.bold,
                           ),
                           onSelected: (selected) {
@@ -198,12 +198,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     label: Text(cat['label']!),
                     selected: isSelected,
                     selectedColor: AppTheme.primary,
-                    backgroundColor: Colors.white.withValues(alpha: 0.04),
+                    backgroundColor: const Color(0xFFF1F5F9),
                     side: BorderSide(
                       color: isSelected ? AppTheme.primary : AppTheme.borderDark,
                     ),
                     labelStyle: TextStyle(
-                      color: isSelected ? Colors.white : AppTheme.textMuted,
+                      color: isSelected ? Colors.white : AppTheme.textMain,
                       fontSize: 12,
                       fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                     ),
@@ -225,7 +225,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             children: [
                               Icon(Icons.search_off_rounded, size: 64, color: AppTheme.textDim.withValues(alpha: 0.5)),
                               const SizedBox(height: 12),
-                              const Text('No properties match your search', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                              const Text('No properties match your search', style: TextStyle(color: AppTheme.textMain, fontSize: 16, fontWeight: FontWeight.bold)),
                               const SizedBox(height: 4),
                               const Text('Try adjusting filters or searching for different areas', style: TextStyle(color: AppTheme.textDim, fontSize: 13)),
                             ],

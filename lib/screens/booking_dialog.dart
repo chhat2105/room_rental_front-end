@@ -92,7 +92,7 @@ class _BookingDialogState extends State<BookingDialog> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.03),
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppTheme.borderDark),
             ),
@@ -101,7 +101,7 @@ class _BookingDialogState extends State<BookingDialog> {
               children: [
                 Text(
                   widget.property.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),
+                  style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -127,7 +127,7 @@ class _BookingDialogState extends State<BookingDialog> {
                 initialDate: _selectedDate,
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 90)),
-                builder: (context, child) => Theme(data: ThemeData.dark(), child: child!),
+                builder: (context, child) => Theme(data: Theme.of(context), child: child!),
               );
               if (picked != null) setState(() => _selectedDate = picked);
             },
@@ -135,14 +135,14 @@ class _BookingDialogState extends State<BookingDialog> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.05),
+                color: const Color(0xFFF1F5F9),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: AppTheme.borderDark),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(DateFormat('EEE, MMM d, yyyy').format(_selectedDate), style: const TextStyle(color: Colors.white)),
+                  Text(DateFormat('EEE, MMM d, yyyy').format(_selectedDate), style: const TextStyle(color: AppTheme.textMain)),
                   const Icon(Icons.calendar_today, size: 16, color: AppTheme.primaryLight),
                 ],
               ),
@@ -158,7 +158,7 @@ class _BookingDialogState extends State<BookingDialog> {
               final picked = await showTimePicker(
                 context: context,
                 initialTime: _selectedTime,
-                builder: (context, child) => Theme(data: ThemeData.dark(), child: child!),
+                builder: (context, child) => Theme(data: Theme.of(context), child: child!),
               );
               if (picked != null) setState(() => _selectedTime = picked);
             },
@@ -166,14 +166,14 @@ class _BookingDialogState extends State<BookingDialog> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.05),
+                color: const Color(0xFFF1F5F9),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: AppTheme.borderDark),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(_selectedTime.format(context), style: const TextStyle(color: Colors.white)),
+                  Text(_selectedTime.format(context), style: const TextStyle(color: AppTheme.textMain)),
                   const Icon(Icons.access_time, size: 16, color: AppTheme.accentCyan),
                 ],
               ),

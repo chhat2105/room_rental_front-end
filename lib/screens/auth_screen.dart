@@ -132,7 +132,7 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: AppTheme.primary,
-          labelColor: Colors.white,
+          labelColor: AppTheme.primary,
           unselectedLabelColor: AppTheme.textMuted,
           tabs: const [
             Tab(text: 'Sign In'),
@@ -150,7 +150,7 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                const Text('Welcome Back', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                const Text('Welcome Back', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                 const SizedBox(height: 6),
                 const Text('Sign in with your RentHub account credentials', style: TextStyle(color: AppTheme.textMuted, fontSize: 14)),
                 const SizedBox(height: 30),
@@ -190,7 +190,7 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Join RentHub', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                const Text('Join RentHub', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                 const SizedBox(height: 6),
                 const Text('Choose your account type and start renting or hosting', style: TextStyle(color: AppTheme.textMuted, fontSize: 14)),
                 const SizedBox(height: 20),
@@ -206,8 +206,8 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                           padding: const EdgeInsets.all(14),
                           decoration: BoxDecoration(
                             color: _selectedRole == 'ROLE_TENANT'
-                                ? AppTheme.primary.withValues(alpha: 0.15)
-                                : Colors.white.withValues(alpha: 0.03),
+                                ? AppTheme.primary.withValues(alpha: 0.12)
+                                : const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: _selectedRole == 'ROLE_TENANT' ? AppTheme.primary : AppTheme.borderDark,
@@ -216,9 +216,9 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                           ),
                           child: Column(
                             children: [
-                              Icon(Icons.key, color: _selectedRole == 'ROLE_TENANT' ? AppTheme.primaryLight : AppTheme.textDim),
+                              Icon(Icons.key, color: _selectedRole == 'ROLE_TENANT' ? AppTheme.primary : AppTheme.textDim),
                               const SizedBox(height: 6),
-                              const Text('Tenant', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                              const Text('Tenant', style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                               const Text('Find & Rent rooms', style: TextStyle(color: AppTheme.textDim, fontSize: 11)),
                             ],
                           ),
@@ -234,8 +234,8 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                           padding: const EdgeInsets.all(14),
                           decoration: BoxDecoration(
                             color: _selectedRole == 'ROLE_LANDLORD'
-                                ? AppTheme.accentEmerald.withValues(alpha: 0.15)
-                                : Colors.white.withValues(alpha: 0.03),
+                                ? AppTheme.accentEmerald.withValues(alpha: 0.12)
+                                : const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
                               color: _selectedRole == 'ROLE_LANDLORD' ? AppTheme.accentEmerald : AppTheme.borderDark,
@@ -246,7 +246,7 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                             children: [
                               Icon(Icons.business_outlined, color: _selectedRole == 'ROLE_LANDLORD' ? AppTheme.accentEmerald : AppTheme.textDim),
                               const SizedBox(height: 6),
-                              const Text('Landlord', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                              const Text('Landlord', style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                               const Text('List your properties', style: TextStyle(color: AppTheme.textDim, fontSize: 11)),
                             ],
                           ),
