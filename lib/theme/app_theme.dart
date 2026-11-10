@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Brand colors — Deep Dark Blue / Navy
-  static const Color primary = Color(0xFF004D8F); // Deep Dark Navy
+  static const Color primary = Color(0xFF006FC1); // Deep Dark Navy
   static const Color primaryDark = Color(0xFF061626); // Midnight Navy
   static const Color primaryLight = Color(0xFF1D4ED8); // Vibrant Royal Dark Blue
   static const Color primarySubtle = Color(0xFFF0F6FF); // Very light blue tint

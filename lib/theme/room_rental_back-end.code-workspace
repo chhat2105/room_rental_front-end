@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../room_rental_back-end"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}

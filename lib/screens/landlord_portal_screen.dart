@@ -111,10 +111,10 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                         children: _allAmenities.map((am) {
                           final isSelected = selectedAmenities.contains(am.id);
                           return FilterChip(
-                            label: Text(am.name, style: TextStyle(fontSize: 11, color: isSelected ? Colors.white : AppTheme.textMuted)),
+                            label: Text(am.name, style: TextStyle(fontSize: 11, color: isSelected ? Colors.white : AppTheme.textMain)),
                             selected: isSelected,
                             selectedColor: AppTheme.primary,
-                            backgroundColor: Colors.white.withValues(alpha: 0.05),
+                            backgroundColor: const Color(0xFFF1F5F9),
                             onSelected: (selected) {
                               setDialogState(() {
                                 if (selected) {
@@ -349,7 +349,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: AppTheme.primary,
-          labelColor: Colors.white,
+          labelColor: AppTheme.primary,
           unselectedLabelColor: AppTheme.textMuted,
           isScrollable: true,
           tabs: [
@@ -375,7 +375,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                             children: [
                               const Icon(Icons.home_work_outlined, size: 54, color: AppTheme.textDim),
                               const SizedBox(height: 12),
-                              const Text('No properties listed yet', style: TextStyle(color: Colors.white, fontSize: 16)),
+                              const Text('No properties listed yet', style: TextStyle(color: AppTheme.textMain, fontSize: 16)),
                               const SizedBox(height: 12),
                               ElevatedButton.icon(
                                 icon: const Icon(Icons.add),
@@ -413,7 +413,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                           width: 70,
                                           height: 70,
                                           fit: BoxFit.cover,
-                                          errorBuilder: (_, __, ___) => Container(width: 70, height: 70, color: Colors.white12),
+                                          errorBuilder: (_, __, ___) => Container(width: 70, height: 70, color: const Color(0xFFF1F5F9)),
                                         ),
                                       ),
                                       const SizedBox(width: 12),
@@ -421,7 +421,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white)),
+                                            Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.textMain)),
                                             const SizedBox(height: 4),
                                             Text(p.address, style: const TextStyle(color: AppTheme.textMuted, fontSize: 12)),
                                             const SizedBox(height: 4),
@@ -498,7 +498,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(app.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white)),
+                                      Text(app.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.textMain)),
                                       Text(app.status, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppTheme.primaryLight)),
                                     ],
                                   ),
@@ -558,7 +558,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(v.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
+                                        Text(v.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14)),
                                         const SizedBox(height: 4),
                                         Text('Tenant: ${v.tenantName ?? "Guest"}', style: const TextStyle(color: AppTheme.textMuted, fontSize: 12)),
                                         Text('Date: ${v.date} at ${v.time}', style: const TextStyle(color: AppTheme.accentCyan, fontSize: 12)),
@@ -617,7 +617,7 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(comp.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                                      Text(comp.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                                       DropdownButton<String>(
                                         value: comp.status,
                                         dropdownColor: AppTheme.surfaceDark,

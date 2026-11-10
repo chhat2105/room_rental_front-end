@@ -228,7 +228,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: AppTheme.primary,
-          labelColor: Colors.white,
+          labelColor: AppTheme.primary,
           unselectedLabelColor: AppTheme.textMuted,
           isScrollable: true,
           tabs: [
@@ -271,7 +271,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                       Expanded(
                                         child: Text(
                                           app.propertyTitle,
-                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.textMain),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -334,7 +334,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                       Expanded(
                                         child: Text(
                                           c.propertyTitle,
-                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.textMain),
                                         ),
                                       ),
                                       _StatusPill(status: c.status),
@@ -345,7 +345,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                   const SizedBox(height: 12),
                                   Row(
                                     children: [
-                                      Text('\$${c.rent.toStringAsFixed(0)}/mo Rent', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
+                                      Text('\$${c.rent.toStringAsFixed(0)}/mo Rent', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14)),
                                       const SizedBox(width: 16),
                                       Text('Deposit: \$${c.deposit.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.accentCyan, fontSize: 14)),
                                     ],
@@ -353,7 +353,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                   const SizedBox(height: 14),
                                   const Divider(color: AppTheme.borderDark),
                                   const SizedBox(height: 8),
-                                  const Text('Invoices & Due Dates', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13)),
+                                  const Text('Invoices & Due Dates', style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 13)),
                                   const SizedBox(height: 8),
                                   if (payments.isEmpty)
                                     const Text('No pending payments', style: TextStyle(color: AppTheme.textDim, fontSize: 12))
@@ -364,7 +364,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                           margin: const EdgeInsets.only(bottom: 8),
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
-                                            color: Colors.white.withValues(alpha: 0.03),
+                                            color: const Color(0xFFF8FAFC),
                                             borderRadius: BorderRadius.circular(8),
                                             border: Border.all(color: AppTheme.borderDark),
                                           ),
@@ -374,13 +374,13 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                               Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text('${p.type} • Due: ${p.dueDate}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 12)),
+                                                  Text('${p.type} • Due: ${p.dueDate}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 12)),
                                                   _StatusPill(status: p.status),
                                                 ],
                                               ),
                                               Row(
                                                 children: [
-                                                  Text('\$${p.amount.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 15)),
+                                                  Text('\$${p.amount.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.textMain, fontSize: 15)),
                                                   if (p.status == 'PENDING') ...[
                                                     const SizedBox(width: 10),
                                                     ElevatedButton(
@@ -431,7 +431,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(v.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                                        Text(v.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 15)),
                                         const SizedBox(height: 6),
                                         Row(
                                           children: [
@@ -487,7 +487,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Report Maintenance Issue', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white)),
+                              const Text('Report Maintenance Issue', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.textMain)),
                               const SizedBox(height: 12),
                               if (_contracts.isEmpty)
                                 const Text('You need an active lease to submit a maintenance ticket.', style: TextStyle(color: AppTheme.textDim, fontSize: 13))
@@ -529,7 +529,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                         const SizedBox(height: 20),
 
                         // Ticket History
-                        const Text('Ticket History', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                        const Text('Ticket History', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                         const SizedBox(height: 10),
                         if (_complaints.isEmpty)
                           const Text('No issues reported.', style: TextStyle(color: AppTheme.textDim, fontSize: 13))
@@ -554,7 +554,7 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(comp.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
+                                        Text(comp.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14)),
                                         _StatusPill(status: comp.status),
                                       ],
                                     ),
@@ -640,15 +640,15 @@ class _PayOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.primary.withValues(alpha: 0.15) : Colors.white.withValues(alpha: 0.03),
+          color: isSelected ? AppTheme.primary.withValues(alpha: 0.12) : const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: isSelected ? AppTheme.primary : AppTheme.borderDark),
         ),
         child: Row(
           children: [
-            Icon(icon, color: isSelected ? AppTheme.primaryLight : AppTheme.textDim, size: 20),
+            Icon(icon, color: isSelected ? AppTheme.primary : AppTheme.textDim, size: 20),
             const SizedBox(width: 12),
-            Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: isSelected ? Colors.white : AppTheme.textMuted, fontSize: 14)),
+            Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: isSelected ? AppTheme.primary : AppTheme.textMain, fontSize: 14)),
           ],
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 import 'providers/property_provider.dart';
-import 'screens/main_nav_screen.dart';
+import 'screens/splash_screen.dart';
 import 'theme/app_theme.dart';
 
 void main() async {
@@ -24,8 +24,9 @@ class RentHubApp extends StatelessWidget {
         title: 'RentHub — Room & Property Rental',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const MainNavScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
 }
+
