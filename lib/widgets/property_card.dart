@@ -34,9 +34,9 @@ class PropertyCard extends StatelessWidget {
           border: Border.all(color: AppTheme.borderDark),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.35),
+              color: const Color(0x0A0F172A),
               blurRadius: 16,
-              offset: const Offset(0, 6),
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -54,7 +54,7 @@ class PropertyCard extends StatelessWidget {
                     imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) => Container(
-                      color: AppTheme.surfaceDark,
+                      color: const Color(0xFFF1F5F9),
                       child: const Center(
                         child: Icon(Icons.home_work_outlined, size: 48, color: AppTheme.textDim),
                       ),
@@ -222,7 +222,7 @@ class PropertyCard extends StatelessWidget {
                               Text(
                                 '\$${property.price.toStringAsFixed(0)}',
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppTheme.textMain,
                                   fontSize: 19,
                                   fontWeight: FontWeight.w800,
                                 ),

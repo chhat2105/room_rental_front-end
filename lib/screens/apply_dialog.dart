@@ -119,7 +119,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.03),
+                color: const Color(0xFFF8FAFC),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: AppTheme.borderDark),
               ),
@@ -131,7 +131,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
                     children: [
                       Text(
                         widget.property.title,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 13),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -160,7 +160,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.05),
+                  color: const Color(0xFFF1F5F9),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppTheme.borderDark),
                 ),
@@ -168,7 +168,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
                   child: DropdownButton<int>(
                     value: _selectedRoomId,
                     isExpanded: true,
-                    dropdownColor: AppTheme.surfaceDark,
+                    dropdownColor: Colors.white,
                     items: widget.property.rooms.map((r) {
                       return DropdownMenuItem<int>(
                         value: r.id,
@@ -176,7 +176,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
                         child: Text(
                           'Room #${r.roomNumber} - \$${r.price.toStringAsFixed(0)}/mo (${r.status})',
                           style: TextStyle(
-                            color: r.status == 'AVAILABLE' ? Colors.white : AppTheme.textDim,
+                            color: r.status == 'AVAILABLE' ? AppTheme.textMain : AppTheme.textDim,
                             fontSize: 13,
                           ),
                         ),
@@ -201,7 +201,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
                   initialDate: _startDate,
                   firstDate: DateTime.now(),
                   lastDate: DateTime.now().add(const Duration(days: 365)),
-                  builder: (context, child) => Theme(data: ThemeData.dark(), child: child!),
+                  builder: (context, child) => Theme(data: Theme.of(context), child: child!),
                 );
                 if (picked != null) setState(() => _startDate = picked);
               },
@@ -209,14 +209,14 @@ class _ApplyDialogState extends State<ApplyDialog> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.05),
+                  color: const Color(0xFFF1F5F9),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppTheme.borderDark),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(DateFormat('MMM d, yyyy').format(_startDate), style: const TextStyle(color: Colors.white)),
+                    Text(DateFormat('MMM d, yyyy').format(_startDate), style: const TextStyle(color: AppTheme.textMain)),
                     const Icon(Icons.calendar_today, size: 16, color: AppTheme.primaryLight),
                   ],
                 ),
@@ -234,7 +234,7 @@ class _ApplyDialogState extends State<ApplyDialog> {
                   initialDate: _endDate,
                   firstDate: _startDate.add(const Duration(days: 30)),
                   lastDate: _startDate.add(const Duration(days: 730)),
-                  builder: (context, child) => Theme(data: ThemeData.dark(), child: child!),
+                  builder: (context, child) => Theme(data: Theme.of(context), child: child!),
                 );
                 if (picked != null) setState(() => _endDate = picked);
               },
@@ -242,14 +242,14 @@ class _ApplyDialogState extends State<ApplyDialog> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.05),
+                  color: const Color(0xFFF1F5F9),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppTheme.borderDark),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(DateFormat('MMM d, yyyy').format(_endDate), style: const TextStyle(color: Colors.white)),
+                    Text(DateFormat('MMM d, yyyy').format(_endDate), style: const TextStyle(color: AppTheme.textMain)),
                     const Icon(Icons.event_repeat, size: 16, color: AppTheme.accentCyan),
                   ],
                 ),

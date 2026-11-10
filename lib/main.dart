@@ -23,7 +23,7 @@ class RentHubApp extends StatelessWidget {
       child: MaterialApp(
         title: 'RentHub — Room & Property Rental',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.darkTheme,
+        theme: AppTheme.lightTheme,
         home: const MainNavScreen(),
       ),
     );

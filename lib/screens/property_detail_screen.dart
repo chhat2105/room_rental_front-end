@@ -224,7 +224,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                       // Title
                       Text(
                         p.title,
-                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white, height: 1.25),
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.textMain, height: 1.25),
                       ),
                       const SizedBox(height: 8),
 
@@ -287,7 +287,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 children: [
                                   Text(
                                     'Hosted by ${p.landlordName ?? "Verified Landlord"}',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14),
                                   ),
                                   const Text(
                                     'Professional Rental Manager • Quick Response',
@@ -302,7 +302,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                       const SizedBox(height: 24),
 
                       // Description
-                      const Text('About Property', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                      const Text('About Property', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                       const SizedBox(height: 8),
                       Text(
                         p.description?.isNotEmpty == true
@@ -314,7 +314,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
 
                       // Amenities
                       if (p.amenities.isNotEmpty) ...[
-                        const Text('Amenities & Perks', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                        const Text('Amenities & Perks', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                         const SizedBox(height: 12),
                         Wrap(
                           spacing: 8,
@@ -323,7 +323,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                             return Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.04),
+                                color: const Color(0xFFF1F5F9),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(color: AppTheme.borderDark),
                               ),
@@ -332,7 +332,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 children: [
                                   const Icon(Icons.check_circle_outline, size: 15, color: AppTheme.accentEmerald),
                                   const SizedBox(width: 6),
-                                  Text(am.name, style: const TextStyle(color: Colors.white, fontSize: 13)),
+                                  Text(am.name, style: const TextStyle(color: AppTheme.textMain, fontSize: 13)),
                                 ],
                               ),
                             );
@@ -343,7 +343,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
 
                       // Rooms Breakdown
                       if (p.rooms.isNotEmpty) ...[
-                        Text('Available Units inside Property (${p.rooms.length})', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                        Text('Available Units inside Property (${p.rooms.length})', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                         const SizedBox(height: 12),
                         ListView.separated(
                           shrinkWrap: true,
@@ -368,7 +368,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                       children: [
                                         Row(
                                           children: [
-                                            Text('Room #${room.roomNumber}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                                            Text('Room #${room.roomNumber}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 15)),
                                             const SizedBox(width: 8),
                                             Container(
                                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -391,7 +391,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                         const SizedBox(height: 4),
                                         Text(
                                           '\$${room.price.toStringAsFixed(0)} / month',
-                                          style: const TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 14),
+                                          style: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.textMain, fontSize: 14),
                                         ),
                                       ],
                                     ),
@@ -422,7 +422,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Tenant Reviews (${_reviews.length})', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                          Text('Tenant Reviews (${_reviews.length})', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: AppTheme.textMain)),
                           Row(
                             children: [
                               const Icon(Icons.star, color: AppTheme.accentAmber, size: 18),
@@ -431,7 +431,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 _reviews.isNotEmpty
                                     ? (_reviews.map((r) => r.rating).reduce((a, b) => a + b) / _reviews.length).toStringAsFixed(1)
                                     : '5.0',
-                                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                                style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain),
                               ),
                             ],
                           ),
@@ -451,7 +451,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                             return Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.03),
+                                color: const Color(0xFFF8FAFC),
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: AppTheme.borderDark),
                               ),
@@ -461,14 +461,14 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(rev.tenantName ?? 'Tenant', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13)),
+                                      Text(rev.tenantName ?? 'Tenant', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 13)),
                                       Row(
                                         children: List.generate(
                                           5,
                                           (s) => Icon(
                                             Icons.star,
                                             size: 14,
-                                            color: s < rev.rating ? AppTheme.accentAmber : Colors.white24,
+                                            color: s < rev.rating ? AppTheme.accentAmber : const Color(0xFFCBD5E1),
                                           ),
                                         ),
                                       ),
@@ -497,7 +497,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Write a Review', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
+                              const Text('Write a Review', style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14)),
                               const SizedBox(height: 8),
                               Row(
                                 children: List.generate(5, (idx) {
@@ -505,7 +505,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                   return IconButton(
                                     padding: EdgeInsets.zero,
                                     constraints: const BoxConstraints(),
-                                    icon: Icon(Icons.star, color: starVal <= _newRating ? AppTheme.accentAmber : Colors.white24, size: 22),
+                                    icon: Icon(Icons.star, color: starVal <= _newRating ? AppTheme.accentAmber : const Color(0xFFCBD5E1), size: 22),
                                     onPressed: () => setState(() => _newRating = starVal),
                                   );
                                 }),
@@ -561,7 +561,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
-                          Text('\$${p.price.toStringAsFixed(0)}', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
+                          Text('\$${p.price.toStringAsFixed(0)}', style: const TextStyle(color: AppTheme.textMain, fontSize: 20, fontWeight: FontWeight.w800)),
                           const Text(' / mo', style: TextStyle(color: AppTheme.textMuted, fontSize: 12)),
                         ],
                       ),
@@ -612,7 +612,7 @@ class _QuickStat extends StatelessWidget {
       children: [
         Icon(icon, color: AppTheme.primaryLight, size: 22),
         const SizedBox(height: 6),
-        Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
+        Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14)),
         Text(subtitle, style: const TextStyle(color: AppTheme.textDim, fontSize: 11)),
       ],
     );
