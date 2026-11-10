@@ -99,59 +99,62 @@ class _ApplyDialogState extends State<ApplyDialog> {
       title: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: AppTheme.accentEmerald.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.verified_outlined, color: AppTheme.accentEmerald, size: 20),
           ),
-          const SizedBox(width: 12),
-          const Text('Apply for Rental', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          const SizedBox(width: 14),
+          const Expanded(
+            child: Text(
+              'Apply for Rental',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
       content: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Pricing Banner
             Container(
-              padding: const EdgeInsets.all(12),
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: const Color(0xFFF8FAFC),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: AppTheme.borderDark),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.property.title,
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 13),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        widget.property.address,
-                        style: const TextStyle(color: AppTheme.textMuted, fontSize: 11),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
                   Text(
-                    '\$${currentPrice.toStringAsFixed(0)}/mo',
-                    style: const TextStyle(fontWeight: FontWeight.w800, color: AppTheme.accentEmerald, fontSize: 15),
+                    widget.property.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 13),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    widget.property.address,
+                    style: const TextStyle(color: AppTheme.textMuted, fontSize: 11),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    '\$${currentPrice.toStringAsFixed(0)}/month',
+                    style: const TextStyle(fontWeight: FontWeight.w600, color: AppTheme.accentEmerald, fontSize: 19),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
 
             // Room selector if rooms exist
             if (widget.property.rooms.isNotEmpty) ...[

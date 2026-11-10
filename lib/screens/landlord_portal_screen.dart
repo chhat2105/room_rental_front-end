@@ -496,10 +496,27 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(app.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.textMain)),
-                                      Text(app.status, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppTheme.primaryLight)),
+                                      Expanded(
+                                        child: Text(
+                                          app.propertyTitle,
+                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.textMain),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: AppTheme.primaryLight.withValues(alpha: 0.1),
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                        child: Text(
+                                          app.status,
+                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppTheme.primaryLight),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   const SizedBox(height: 6),
@@ -615,9 +632,16 @@ class _LandlordPortalScreenState extends State<LandlordPortalScreen> with Single
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(comp.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain)),
+                                      Expanded(
+                                        child: Text(
+                                          comp.propertyTitle,
+                                          style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
                                       DropdownButton<String>(
                                         value: comp.status,
                                         dropdownColor: AppTheme.surfaceDark,

@@ -82,7 +82,13 @@ class _BookingDialogState extends State<BookingDialog> {
             child: const Icon(Icons.calendar_month, color: AppTheme.primaryLight, size: 20),
           ),
           const SizedBox(width: 12),
-          const Text('Schedule a Tour', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          const Expanded(
+            child: Text(
+              'Schedule a Tour',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
       content: Column(
@@ -90,6 +96,7 @@ class _BookingDialogState extends State<BookingDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: const Color(0xFFF8FAFC),

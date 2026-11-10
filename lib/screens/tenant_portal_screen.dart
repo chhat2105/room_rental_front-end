@@ -552,9 +552,16 @@ class _TenantPortalScreenState extends State<TenantPortalScreen> with SingleTick
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(comp.propertyTitle, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14)),
+                                        Expanded(
+                                          child: Text(
+                                            comp.propertyTitle,
+                                            style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textMain, fontSize: 14),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
                                         _StatusPill(status: comp.status),
                                       ],
                                     ),
