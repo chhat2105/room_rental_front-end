@@ -6,6 +6,7 @@ class UserModel {
   final String? lastName;
   final String? phoneNumber;
   final String? profile;
+  final String? status;
   final List<String> roles;
 
   UserModel({
@@ -16,19 +17,23 @@ class UserModel {
     this.lastName,
     this.phoneNumber,
     this.profile,
+    this.status,
     required this.roles,
   });
 
   String get fullName {
-    if (firstName != null && firstName!.isNotEmpty) {
-      return '$firstName ${lastName ?? ''}'.trim();
+    final fn = firstName ?? '';
+    final ln = lastName ?? '';
+    final combined = '$fn $ln'.trim();
+    if (combined.isNotEmpty) {
+      return combined;
     }
     return username;
   }
 
-  bool get isLandlord => roles.any((r) => r.toUpperCase().contains('LANDLORD'));
-  bool get isTenant => !isLandlord;
   bool get isAdmin => roles.any((r) => r.toUpperCase().contains('ADMIN'));
+  bool get isLandlord => roles.any((r) => r.toUpperCase().contains('LANDLORD'));
+  bool get isTenant => !isAdmin && !isLandlord;
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     List<String> parsedRoles = [];
@@ -52,6 +57,7 @@ class UserModel {
       lastName: json['lastName'],
       phoneNumber: json['phoneNumber'],
       profile: json['profile'],
+      status: json['status'],
       roles: parsedRoles,
     );
   }
@@ -65,6 +71,7 @@ class UserModel {
       'lastName': lastName,
       'phoneNumber': phoneNumber,
       'profile': profile,
+      'status': status,
       'roles': roles,
     };
   }
@@ -92,6 +99,64 @@ class AuthResponse {
       tokenType: json['tokenType'],
       expiresIn: (json['expiresIn'] as num?)?.toInt(),
       user: json['user'] != null ? UserModel.fromJson(json['user']) : null,
+    );
+  }
+}
+
+class UserProfileModel {
+  final int id;
+  final String name;
+  final String email;
+  final String? phone;
+  final String? profileImage;
+  final int completedRentals;
+  final int activeRentals;
+
+  UserProfileModel({
+    required this.id,
+    required this.name,
+    required this.email,
+    this.phone,
+    this.profileImage,
+    required this.completedRentals,
+    required this.activeRentals,
+  });
+
+  factory UserProfileModel.fromJson(Map<String, dynamic> json) {
+    return UserProfileModel(
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'],
+      profileImage: json['profileImage'],
+      completedRentals: (json['completedRentals'] as num?)?.toInt() ?? 0,
+      activeRentals: (json['activeRentals'] as num?)?.toInt() ?? 0,
+    );
+  }
+}
+
+class AdminUserModel {
+  final int id;
+  final String name;
+  final String email;
+  final String? phone;
+  final bool enabled;
+
+  AdminUserModel({
+    required this.id,
+    required this.name,
+    required this.email,
+    this.phone,
+    required this.enabled,
+  });
+
+  factory AdminUserModel.fromJson(Map<String, dynamic> json) {
+    return AdminUserModel(
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'],
+      enabled: json['enabled'] == true,
     );
   }
 }

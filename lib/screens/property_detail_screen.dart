@@ -7,8 +7,10 @@ import '../providers/auth_provider.dart';
 import '../providers/property_provider.dart';
 import '../services/api_service.dart';
 import '../theme/app_theme.dart';
+import 'auth_screen.dart';
 import 'booking_dialog.dart';
 import 'apply_dialog.dart';
+import 'messages_screen.dart';
 
 class PropertyDetailScreen extends StatefulWidget {
   final int propertyId;
@@ -78,7 +80,10 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
       if (mounted) {
         setState(() => _reviews = r);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(backgroundColor: AppTheme.accentEmerald, content: Text('Review posted!')),
+          const SnackBar(
+            backgroundColor: AppTheme.accentEmerald,
+            content: Text('Review posted!'),
+          ),
         );
       }
     } catch (e) {
@@ -138,12 +143,15 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                             width: double.infinity,
                             errorBuilder: (_, __, ___) => Container(
                               color: AppTheme.surfaceDark,
-                              child: const Icon(Icons.home_work_outlined, size: 64, color: AppTheme.textDim),
+                              child: const Icon(
+                                Icons.home_work_outlined,
+                                size: 64,
+                                color: AppTheme.textDim,
+                              ),
                             ),
                           );
                         },
                       ),
-                      // Dot Indicators
                       if (images.length > 1)
                         Positioned(
                           bottom: 16,
@@ -158,7 +166,9 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 width: _activeImageIndex == idx ? 16 : 6,
                                 height: 6,
                                 decoration: BoxDecoration(
-                                  color: _activeImageIndex == idx ? AppTheme.primaryLight : Colors.white54,
+                                  color: _activeImageIndex == idx
+                                      ? AppTheme.primaryLight
+                                      : Colors.white54,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                               ),
@@ -170,8 +180,10 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                 ),
                 actions: [
                   IconButton(
-                    icon: Icon(isFav ? Icons.favorite : Icons.favorite_border,
-                        color: isFav ? AppTheme.accentRose : Colors.white),
+                    icon: Icon(
+                      isFav ? Icons.favorite : Icons.favorite_border,
+                      color: isFav ? AppTheme.accentRose : Colors.white,
+                    ),
                     onPressed: () => propProv.toggleFavorite(p.id),
                   ),
                 ],
@@ -184,22 +196,29 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Type and Status pills
-                      Row(
+                      // Type, Status, and Furnished pills
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
                         children: [
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
                               color: AppTheme.primary.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(6),
-                              border: Border.all(color: AppTheme.primary.withValues(alpha: 0.4)),
+                              border: Border.all(
+                                color: AppTheme.primary.withValues(alpha: 0.4),
+                              ),
                             ),
                             child: Text(
                               p.propertyType,
-                              style: const TextStyle(color: AppTheme.primaryLight, fontSize: 11, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                color: AppTheme.primaryLight,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
@@ -211,12 +230,30 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                             child: Text(
                               p.status,
                               style: TextStyle(
-                                color: p.status == 'PUBLISHED' ? AppTheme.accentEmerald : AppTheme.accentAmber,
+                                color: p.status == 'PUBLISHED'
+                                    ? AppTheme.accentEmerald
+                                    : AppTheme.accentAmber,
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
+                          if (p.furnished)
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AppTheme.accentCyan.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: const Text(
+                                'FURNISHED',
+                                style: TextStyle(
+                                  color: AppTheme.accentCyan,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -224,7 +261,12 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                       // Title
                       Text(
                         p.title,
-                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white, height: 1.25),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          height: 1.25,
+                        ),
                       ),
                       const SizedBox(height: 8),
 
@@ -254,16 +296,32 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _QuickStat(icon: Icons.bed_outlined, title: '${p.totalBedrooms > 0 ? p.totalBedrooms : 1}', subtitle: 'Beds'),
-                            _QuickStat(icon: Icons.bathtub_outlined, title: '${p.totalBathrooms > 0 ? p.totalBathrooms : 1}', subtitle: 'Baths'),
-                            _QuickStat(icon: Icons.door_front_door_outlined, title: '${p.rooms.length}', subtitle: 'Rooms'),
-                            _QuickStat(icon: Icons.verified_user_outlined, title: 'Verified', subtitle: 'Host'),
+                            _QuickStat(
+                              icon: Icons.bed_outlined,
+                              title: '${p.totalBedrooms > 0 ? p.totalBedrooms : 1}',
+                              subtitle: 'Beds',
+                            ),
+                            _QuickStat(
+                              icon: Icons.bathtub_outlined,
+                              title: '${p.totalBathrooms > 0 ? p.totalBathrooms : 1}',
+                              subtitle: 'Baths',
+                            ),
+                            _QuickStat(
+                              icon: Icons.door_front_door_outlined,
+                              title: '${p.rooms.length}',
+                              subtitle: 'Rooms',
+                            ),
+                            _QuickStat(
+                              icon: Icons.chair_outlined,
+                              title: p.furnished ? 'Yes' : 'No',
+                              subtitle: 'Furnished',
+                            ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 24),
 
-                      // Managed by Landlord Box
+                      // Managed by Landlord Box + Message Button
                       Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
@@ -276,8 +334,13 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                             CircleAvatar(
                               backgroundColor: AppTheme.primary,
                               child: Text(
-                                p.landlordName?.isNotEmpty == true ? p.landlordName![0].toUpperCase() : 'L',
-                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                p.landlordName?.isNotEmpty == true
+                                    ? p.landlordName![0].toUpperCase()
+                                    : 'L',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -287,7 +350,11 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 children: [
                                   Text(
                                     'Hosted by ${p.landlordName ?? "Verified Landlord"}',
-                                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                   const Text(
                                     'Professional Rental Manager • Quick Response',
@@ -296,25 +363,72 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 ],
                               ),
                             ),
+                            if (p.landlordId != null && p.landlordId != auth.user?.id)
+                              OutlinedButton.icon(
+                                icon: const Icon(Icons.chat_bubble_outline, size: 15),
+                                label: const Text('Chat', style: TextStyle(fontSize: 12)),
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (!auth.isAuthenticated) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (_) => const AuthScreen()),
+                                    );
+                                    return;
+                                  }
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ChatScreen(
+                                        otherUserId: p.landlordId!,
+                                        otherUserName: p.landlordName ?? 'Landlord',
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 24),
 
                       // Description
-                      const Text('About Property', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                      const Text(
+                        'About Property',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         p.description?.isNotEmpty == true
                             ? p.description!
                             : 'Modern living space featuring contemporary finishes, abundant natural light, and convenient proximity to transport and amenities.',
-                        style: const TextStyle(color: AppTheme.textMuted, fontSize: 14, height: 1.6),
+                        style: const TextStyle(
+                          color: AppTheme.textMuted,
+                          fontSize: 14,
+                          height: 1.6,
+                        ),
                       ),
                       const SizedBox(height: 24),
 
                       // Amenities
                       if (p.amenities.isNotEmpty) ...[
-                        const Text('Amenities & Perks', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                        const Text(
+                          'Amenities & Perks',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                         const SizedBox(height: 12),
                         Wrap(
                           spacing: 8,
@@ -330,9 +444,16 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.check_circle_outline, size: 15, color: AppTheme.accentEmerald),
+                                  const Icon(
+                                    Icons.check_circle_outline,
+                                    size: 15,
+                                    color: AppTheme.accentEmerald,
+                                  ),
                                   const SizedBox(width: 6),
-                                  Text(am.name, style: const TextStyle(color: Colors.white, fontSize: 13)),
+                                  Text(
+                                    am.name,
+                                    style: const TextStyle(color: Colors.white, fontSize: 13),
+                                  ),
                                 ],
                               ),
                             );
@@ -343,7 +464,14 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
 
                       // Rooms Breakdown
                       if (p.rooms.isNotEmpty) ...[
-                        Text('Available Units inside Property (${p.rooms.length})', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                        Text(
+                          'Available Units inside Property (${p.rooms.length})',
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                         const SizedBox(height: 12),
                         ListView.separated(
                           shrinkWrap: true,
@@ -368,17 +496,36 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                       children: [
                                         Row(
                                           children: [
-                                            Text('Room #${room.roomNumber}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15)),
+                                            Text(
+                                              'Room #${room.roomNumber}',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
                                             const SizedBox(width: 8),
                                             Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 6,
+                                                vertical: 2,
+                                              ),
                                               decoration: BoxDecoration(
-                                                color: isAvail ? AppTheme.accentEmerald.withValues(alpha: 0.2) : Colors.red.withValues(alpha: 0.2),
+                                                color: isAvail
+                                                    ? AppTheme.accentEmerald
+                                                        .withValues(alpha: 0.2)
+                                                    : Colors.red.withValues(alpha: 0.2),
                                                 borderRadius: BorderRadius.circular(4),
                                               ),
                                               child: Text(
                                                 room.status,
-                                                style: TextStyle(color: isAvail ? AppTheme.accentEmerald : Colors.red, fontSize: 10, fontWeight: FontWeight.bold),
+                                                style: TextStyle(
+                                                  color: isAvail
+                                                      ? AppTheme.accentEmerald
+                                                      : Colors.red,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -386,12 +533,19 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                         const SizedBox(height: 4),
                                         Text(
                                           '${room.bedrooms} Bed • ${room.bathrooms} Bath ${room.size > 0 ? "• ${room.size}m²" : ""}',
-                                          style: const TextStyle(color: AppTheme.textMuted, fontSize: 12),
+                                          style: const TextStyle(
+                                            color: AppTheme.textMuted,
+                                            fontSize: 12,
+                                          ),
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
                                           '\$${room.price.toStringAsFixed(0)} / month',
-                                          style: const TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 14),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -401,14 +555,21 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                       onPressed: () {
                                         showDialog(
                                           context: context,
-                                          builder: (_) => ApplyDialog(property: p, initialRoom: room),
+                                          builder: (_) =>
+                                              ApplyDialog(property: p, initialRoom: room),
                                         );
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 14,
+                                          vertical: 8,
+                                        ),
                                         backgroundColor: AppTheme.primary,
                                       ),
-                                      child: const Text('Rent Room', style: TextStyle(fontSize: 12)),
+                                      child: const Text(
+                                        'Rent Room',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
                                     ),
                                 ],
                               ),
@@ -422,16 +583,30 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Tenant Reviews (${_reviews.length})', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                          Text(
+                            'Tenant Reviews (${_reviews.length})',
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                           Row(
                             children: [
                               const Icon(Icons.star, color: AppTheme.accentAmber, size: 18),
                               const SizedBox(width: 4),
                               Text(
                                 _reviews.isNotEmpty
-                                    ? (_reviews.map((r) => r.rating).reduce((a, b) => a + b) / _reviews.length).toStringAsFixed(1)
+                                    ? (_reviews
+                                                .map((r) => r.rating)
+                                                .reduce((a, b) => a + b) /
+                                            _reviews.length)
+                                        .toStringAsFixed(1)
                                     : '5.0',
-                                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
@@ -439,7 +614,10 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                       ),
                       const SizedBox(height: 12),
                       if (_reviews.isEmpty)
-                        const Text('No reviews yet. Be the first to review!', style: TextStyle(color: AppTheme.textDim, fontSize: 13))
+                        const Text(
+                          'No reviews yet. Be the first to review!',
+                          style: TextStyle(color: AppTheme.textDim, fontSize: 13),
+                        )
                       else
                         ListView.separated(
                           shrinkWrap: true,
@@ -461,14 +639,23 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(rev.tenantName ?? 'Tenant', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13)),
+                                      Text(
+                                        rev.tenantName ?? 'Tenant',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                        ),
+                                      ),
                                       Row(
                                         children: List.generate(
                                           5,
                                           (s) => Icon(
                                             Icons.star,
                                             size: 14,
-                                            color: s < rev.rating ? AppTheme.accentAmber : Colors.white24,
+                                            color: s < rev.rating
+                                                ? AppTheme.accentAmber
+                                                : Colors.white24,
                                           ),
                                         ),
                                       ),
@@ -476,7 +663,13 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                   ),
                                   if (rev.comment != null && rev.comment!.isNotEmpty) ...[
                                     const SizedBox(height: 6),
-                                    Text(rev.comment!, style: const TextStyle(color: AppTheme.textMuted, fontSize: 13)),
+                                    Text(
+                                      rev.comment!,
+                                      style: const TextStyle(
+                                        color: AppTheme.textMuted,
+                                        fontSize: 13,
+                                      ),
+                                    ),
                                   ],
                                 ],
                               ),
@@ -497,7 +690,14 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Write a Review', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
+                              const Text(
+                                'Write a Review',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
                               const SizedBox(height: 8),
                               Row(
                                 children: List.generate(5, (idx) {
@@ -505,7 +705,13 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                   return IconButton(
                                     padding: EdgeInsets.zero,
                                     constraints: const BoxConstraints(),
-                                    icon: Icon(Icons.star, color: starVal <= _newRating ? AppTheme.accentAmber : Colors.white24, size: 22),
+                                    icon: Icon(
+                                      Icons.star,
+                                      color: starVal <= _newRating
+                                          ? AppTheme.accentAmber
+                                          : Colors.white24,
+                                      size: 22,
+                                    ),
                                     onPressed: () => setState(() => _newRating = starVal),
                                   );
                                 }),
@@ -524,7 +730,14 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 child: ElevatedButton(
                                   onPressed: _isSubmittingReview ? null : _submitReview,
                                   child: _isSubmittingReview
-                                      ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                                      ? const SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            color: Colors.white,
+                                          ),
+                                        )
                                       : const Text('Post Review'),
                                 ),
                               ),
@@ -556,13 +769,30 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('TOTAL RENT', style: TextStyle(color: AppTheme.textDim, fontSize: 10, fontWeight: FontWeight.bold)),
+                      const Text(
+                        'TOTAL RENT',
+                        style: TextStyle(
+                          color: AppTheme.textDim,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
-                          Text('\$${p.price.toStringAsFixed(0)}', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
-                          const Text(' / mo', style: TextStyle(color: AppTheme.textMuted, fontSize: 12)),
+                          Text(
+                            '\$${p.price.toStringAsFixed(0)}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          const Text(
+                            ' / mo',
+                            style: TextStyle(color: AppTheme.textMuted, fontSize: 12),
+                          ),
                         ],
                       ),
                     ],
@@ -604,7 +834,11 @@ class _QuickStat extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const _QuickStat({required this.icon, required this.title, required this.subtitle});
+  const _QuickStat({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -612,8 +846,18 @@ class _QuickStat extends StatelessWidget {
       children: [
         Icon(icon, color: AppTheme.primaryLight, size: 22),
         const SizedBox(height: 6),
-        Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14)),
-        Text(subtitle, style: const TextStyle(color: AppTheme.textDim, fontSize: 11)),
+        Text(
+          title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 14,
+          ),
+        ),
+        Text(
+          subtitle,
+          style: const TextStyle(color: AppTheme.textDim, fontSize: 11),
+        ),
       ],
     );
   }

@@ -11,23 +11,32 @@ class PropertyProvider extends ChangeNotifier {
   Set<int> _favoriteIds = {};
 
   bool _isLoading = false;
+  String? _errorMessage;
   String _searchQuery = '';
   String _selectedType = 'ALL';
+  double? _minPrice;
   double? _maxPrice;
   int? _bedrooms;
+  bool? _furnished;
+  List<int> _selectedAmenityIds = [];
 
   List<PropertyModel> get properties => _properties;
   List<PropertyModel> get favorites => _favorites;
   List<AmenityModel> get amenities => _amenities;
   bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
   String get searchQuery => _searchQuery;
   String get selectedType => _selectedType;
+  double? get minPrice => _minPrice;
   double? get maxPrice => _maxPrice;
   int? get bedrooms => _bedrooms;
+  bool? get furnished => _furnished;
+  List<int> get selectedAmenityIds => _selectedAmenityIds;
 
   bool isFavorite(int propertyId) => _favoriteIds.contains(propertyId);
 
   Future<void> init() async {
+    await _api.init();
     await Future.wait([
       loadProperties(),
       loadAmenities(),
@@ -44,23 +53,37 @@ class PropertyProvider extends ChangeNotifier {
     loadProperties();
   }
 
-  void setFilters({double? maxPrice, int? bedrooms}) {
+  void setFilters({
+    double? minPrice,
+    double? maxPrice,
+    int? bedrooms,
+    bool? furnished,
+    List<int>? amenityIds,
+  }) {
+    _minPrice = minPrice;
     _maxPrice = maxPrice;
     _bedrooms = bedrooms;
+    _furnished = furnished;
+    _selectedAmenityIds = amenityIds ?? [];
     loadProperties();
   }
 
   Future<void> loadProperties() async {
     _isLoading = true;
+    _errorMessage = null;
     notifyListeners();
     try {
       _properties = await _api.getProperties(
         q: _searchQuery.isEmpty ? null : _searchQuery,
         type: _selectedType,
+        minPrice: _minPrice,
         maxPrice: _maxPrice,
         bedrooms: _bedrooms,
+        furnished: _furnished,
+        amenityIds: _selectedAmenityIds.isEmpty ? null : _selectedAmenityIds,
       );
     } catch (e) {
+      _errorMessage = e.toString().replaceAll('Exception: ', '');
       debugPrint('Error loading properties: $e');
     } finally {
       _isLoading = false;
@@ -78,7 +101,12 @@ class PropertyProvider extends ChangeNotifier {
   }
 
   Future<void> loadFavorites() async {
-    if (_api.token == null) return;
+    if (_api.token == null) {
+      _favorites = [];
+      _favoriteIds = {};
+      notifyListeners();
+      return;
+    }
     try {
       _favorites = await _api.getFavorites();
       _favoriteIds = _favorites.map((f) => f.id).toSet();

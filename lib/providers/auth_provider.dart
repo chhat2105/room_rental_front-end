@@ -5,9 +5,11 @@ import '../services/api_service.dart';
 class AuthProvider extends ChangeNotifier {
   final ApiService _api = ApiService();
   UserModel? _user;
+  UserProfileModel? _profile;
   bool _isLoading = false;
 
   UserModel? get user => _user;
+  UserProfileModel? get profile => _profile;
   bool get isAuthenticated => _user != null && _api.token != null;
   bool get isLandlord => _user?.isLandlord ?? false;
   bool get isTenant => _user?.isTenant ?? true;
@@ -18,6 +20,17 @@ class AuthProvider extends ChangeNotifier {
     await _api.init();
     _user = await _api.getCachedUser();
     notifyListeners();
+    if (isAuthenticated && _user != null) {
+      loadProfile();
+    }
+  }
+
+  Future<void> loadProfile() async {
+    if (_user == null) return;
+    try {
+      _profile = await _api.getUserProfile(_user!.id);
+      notifyListeners();
+    } catch (_) {}
   }
 
   Future<void> login(String username, String password) async {
@@ -27,6 +40,9 @@ class AuthProvider extends ChangeNotifier {
       final res = await _api.login(username, password);
       _user = res.user;
       notifyListeners();
+      if (_user != null) {
+        loadProfile();
+      }
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -65,6 +81,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> logout() async {
     await _api.logout(_user?.id);
     _user = null;
+    _profile = null;
     notifyListeners();
   }
 }

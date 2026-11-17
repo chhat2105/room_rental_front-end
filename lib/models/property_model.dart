@@ -72,7 +72,9 @@ class PropertyModel {
   final double? latitude;
   final double? longitude;
   final double price;
-  final String status; // 'DRAFT', 'PUBLISHED', 'RENTED', 'UNPUBLISHED'
+  final bool furnished;
+  final String status; // 'DRAFT', 'PENDING_REVIEW', 'PUBLISHED', 'REJECTED', 'RENTED', 'UNPUBLISHED'
+  final String? rejectionReason;
   final String? createdAt;
   final List<ImageModel> images;
   final List<AmenityModel> amenities;
@@ -89,7 +91,9 @@ class PropertyModel {
     this.latitude,
     this.longitude,
     required this.price,
+    this.furnished = false,
     required this.status,
+    this.rejectionReason,
     this.createdAt,
     required this.images,
     required this.amenities,
@@ -135,8 +139,10 @@ class PropertyModel {
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      furnished: json['furnished'] == true,
       status: json['status'] ?? 'DRAFT',
-      createdAt: json['createdAt'],
+      rejectionReason: json['rejectionReason'],
+      createdAt: json['createdAt']?.toString(),
       images: parsedImages,
       amenities: parsedAmenities,
       rooms: parsedRooms,

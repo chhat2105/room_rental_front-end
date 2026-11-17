@@ -29,8 +29,8 @@ class ApplicationModel {
       propertyId: (json['propertyId'] as num?)?.toInt() ?? 0,
       propertyTitle: json['propertyTitle'] ?? '',
       roomId: (json['roomId'] as num?)?.toInt(),
-      startDate: json['startDate'] ?? '',
-      endDate: json['endDate'] ?? '',
+      startDate: json['startDate']?.toString() ?? '',
+      endDate: json['endDate']?.toString() ?? '',
       status: json['status'] ?? 'PENDING',
     );
   }
@@ -48,6 +48,7 @@ class ContractModel {
   final String startDate;
   final String endDate;
   final String status; // 'PENDING_PAYMENT', 'ACTIVE', 'COMPLETED', 'CANCELLED'
+  final String? movedInAt;
 
   ContractModel({
     required this.id,
@@ -61,6 +62,7 @@ class ContractModel {
     required this.startDate,
     required this.endDate,
     required this.status,
+    this.movedInAt,
   });
 
   factory ContractModel.fromJson(Map<String, dynamic> json) {
@@ -73,9 +75,10 @@ class ContractModel {
       tenantName: json['tenantName'] ?? '',
       rent: (json['rent'] as num?)?.toDouble() ?? 0.0,
       deposit: (json['deposit'] as num?)?.toDouble() ?? 0.0,
-      startDate: json['startDate'] ?? '',
-      endDate: json['endDate'] ?? '',
+      startDate: json['startDate']?.toString() ?? '',
+      endDate: json['endDate']?.toString() ?? '',
       status: json['status'] ?? 'PENDING_PAYMENT',
+      movedInAt: json['movedInAt']?.toString(),
     );
   }
 }
@@ -107,8 +110,8 @@ class PaymentModel {
       contractId: (json['contractId'] as num?)?.toInt(),
       type: json['type'] ?? 'RENT',
       amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
-      dueDate: json['dueDate'] ?? '',
-      paymentDate: json['paymentDate'],
+      dueDate: json['dueDate']?.toString() ?? '',
+      paymentDate: json['paymentDate']?.toString(),
       paymentMethod: json['paymentMethod'],
       status: json['status'] ?? 'PENDING',
     );
